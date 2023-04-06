@@ -73,6 +73,19 @@
             cursor: pointer;
         }
 
+        .camera_button1out {
+            background-color: #cfc101;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
         .camera_button2 {
             background-color: #ff406a;
             color: black;
@@ -86,8 +99,34 @@
             cursor: pointer;
         }
 
+        .camera_button2out {
+            background-color: #de3163;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
         .upload_button {
             background-color: #5eec53;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
+        .upload_buttonout {
+            background-color: #1bba18;
             color: black;
             padding: 15px;
             font-size: 16px;
@@ -144,12 +183,18 @@
 
 <body>
 <div class='header'>
-    oring検出システム1.1
+    oring検出システム1.2
 </div>
 <div class='content'>
 
     <div class='upload_part'>
-        <button class='upload_button' id="upload_button">写真アップロード</button>
+        <button class='upload_button' id="upload_button" onmousemove="this.className='upload_buttonout'" onmouseout="this.className='upload_button'">写真アップロード</button>
+<!--        <script>
+            upload_button.onclick = function (){
+                upload_button.style.backgroundColor = "#00a300";
+                this.className = 'upload_button'
+            }
+        </script>-->
         <div class='upload_hint' id='upload_hint'>
                 対応フォーマット: PNG, JPG と JPEG.
         </div>
@@ -161,7 +206,7 @@
     <div class='camera_part1'>
         <div align = "center" style="position:relative;top:10px">
         <form action="/camera" enctype='multipart/form-data' method='POST'>
-        <input type="submit" value="カメラオン" class='camera_button1'>
+        <input type="submit" value="カメラオン" class='camera_button1' onmousemove="this.className='camera_button1out'" onmouseout="this.className='camera_button1'">
         </form>
         </div>
     </div>
@@ -169,7 +214,7 @@
     <div class='camera_part2'>
         <div align = "center" style="position:relative;top:10px">
         <form action="/cameraoff" enctype='multipart/form-data' method='POST'>
-        <input type="submit" value="カメラオフ" class='camera_button2'>
+        <input type="submit" value="カメラオフ" class='camera_button2' onmousemove="this.className='camera_button2out'" onmouseout="this.className='camera_button2'">
         </form>
         </div>
     </div>
@@ -179,7 +224,6 @@
             <img src="{{ url_for('video_feed') }}" alt="">
         </div>
     </div>
-
 </body>
 <script>
 
