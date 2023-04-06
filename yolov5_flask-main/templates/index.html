@@ -1,0 +1,197 @@
+{% block content %}
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+            color:white;
+        }
+
+        body, html {
+                  height: 100%;
+                }
+            html, body {
+                padding: 0px;
+                margin: 0px;
+                background-color: #8c8c8c;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100%;
+                overflow-x: scroll;
+            }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 30;
+            color:white;
+
+            text-align: center;
+            padding: 30px;
+        }
+        .footer
+        {
+
+        }
+
+        .info
+        {
+            text-align:left;
+            color:gray;
+            width:30%;
+            margin:auto;
+            padding:20px;
+            font-size:14px;
+        }
+
+
+        .content {
+            width: 100%;
+        }
+
+        .upload_part {
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 40px;
+        }
+
+        .camera_button1 {
+            background-color: #FEED06;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
+        .camera_button2 {
+            background-color: #ff406a;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
+        .upload_button {
+            background-color: #5eec53;
+            color: black;
+            padding: 15px;
+            font-size: 16px;
+            border: 0px;
+            border-radius: 5px;
+            -webkit-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            -moz-box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            box-shadow: 6px 8px 18px -5px rgba(0, 0, 0, 0.38);
+            cursor: pointer;
+        }
+
+        .upload_hint {
+            margin: 10px;
+            font-size: 14px;
+            color: rgb(200, 200, 200);
+        }
+
+        .result_part {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .result_title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .result_id {
+            padding: 10px;
+            margin: 15px;
+            font-size: 16px;
+
+        }
+
+        .result_id_number {
+            margin: 15px;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: #FEED06;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+
+        }
+
+        img {
+            width:30%;
+            height:auto
+        }
+    </style>
+</head>
+
+<body>
+<div class='header'>
+    oring検出システム1.1
+</div>
+<div class='content'>
+
+    <div class='upload_part'>
+        <button class='upload_button' id="upload_button">写真アップロード</button>
+        <div class='upload_hint' id='upload_hint'>
+                対応フォーマット: PNG, JPG と JPEG.
+        </div>
+        <form action="/video" method="POST" enctype="multipart/form-data" id='form'>
+            <input type="file" name="file" id="fileinput" style="display: none;" accept="image/*">
+        </form>
+    </div>
+
+    <div class='camera_part1'>
+        <div align = "center" style="position:relative;top:10px">
+        <form action="/camera" enctype='multipart/form-data' method='POST'>
+        <input type="submit" value="カメラオン" class='camera_button1'>
+        </form>
+        </div>
+    </div>
+
+    <div class='camera_part2'>
+        <div align = "center" style="position:relative;top:10px">
+        <form action="/cameraoff" enctype='multipart/form-data' method='POST'>
+        <input type="submit" value="カメラオフ" class='camera_button2'>
+        </form>
+        </div>
+    </div>
+
+    <div class="img">
+        <div align = "center" style="position:relative;top:10px">
+            <img src="{{ url_for('video_feed') }}" alt="">
+        </div>
+    </div>
+
+</body>
+<script>
+
+    $('#upload_button').click(function () {
+        $("#fileinput").trigger('click');
+    });
+
+    $('#fileinput').change(function () {
+        $('#form').submit();
+        $('#upload_hint').text('ファイルが ' + $('#fileinput')[0].files[0].name + ' サーバーに......');
+    });
+
+
+</script>
+{% endblock %}
